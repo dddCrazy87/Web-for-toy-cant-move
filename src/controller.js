@@ -107,7 +107,7 @@ connectWsBtn.addEventListener("click", async () => {
         if (state === "open") {
             connectWsBtn.classList.add("hidden");
             disconnectWsBtn.classList.remove("hidden");
-            mgr.initiateOffersToAllPeers();
+            //mgr.initiateOffersToAllPeers();
         } else {
             connectWsBtn.classList.remove("hidden");
             disconnectWsBtn.classList.add("hidden");
@@ -127,7 +127,7 @@ connectWsBtn.addEventListener("click", async () => {
     };
 
     try {
-        await mgr.connect(wsUrl, false, false);
+        await mgr.connect(wsUrl, true, false);
     } catch (e) {
         console.error("WebSocket 連線失敗", e);
     }
