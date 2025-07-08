@@ -107,6 +107,7 @@ connectWsBtn.addEventListener("click", async () => {
         if (state === "open") {
             connectWsBtn.classList.add("hidden");
             disconnectWsBtn.classList.remove("hidden");
+            mgr.initiateOffersToAllPeers();
         } else {
             connectWsBtn.classList.remove("hidden");
             disconnectWsBtn.classList.add("hidden");
