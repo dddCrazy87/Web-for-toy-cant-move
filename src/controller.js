@@ -26,7 +26,7 @@ function sendMoveVector(vector) {
         window.webRTCManager.sendViaDataChannel(msg);
         console.log("送出移動向量: " + msg);
     } else {
-        console.warn("WebRTC 尚未連線，無法送出移動向量:", vector);
+        console.warn("WebRTC 尚未連線，無法送出移動向量:", msg);
     }
 }
 
@@ -126,7 +126,7 @@ connectWsBtn.addEventListener("click", async () => {
     };
 
     try {
-        await mgr.connect(wsUrl, false, false); // 控制器只收不送影音
+        await mgr.connect(wsUrl, false, false);
     } catch (e) {
         console.error("WebSocket 連線失敗", e);
     }
