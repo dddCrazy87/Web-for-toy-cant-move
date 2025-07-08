@@ -1,11 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>aaa</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toy Controller</title>
+  <link rel="stylesheet" href="./src/style.css" />
 </head>
+
 <body>
-    <p>aaaaaaaaaaaaaaaaaaaaaa</p>
+  <h1>Toy Controller</h1>
+
+  <!-- WebRTC Connect UI -->
+  <div>
+    <input id="websocketUrl" value="wss://toy-cant-move-server.glitch.me " />
+    <input id="localPeerId" />
+    <input id="stunServer" value="stun:stun.l.google.com:19302" />
+    <button id="connectWsBtn">Connect</button>
+    <button id="disconnectWsBtn" class="hidden">Disconnect</button>
+  </div>
+
+  <!-- 控制器按鈕 -->
+  <div class="controller">
+    <div class="empty"></div>
+    <button id="up">↑</button>
+    <div class="empty"></div>
+    <button id="left">←</button>
+    <div class="empty"></div>
+    <button id="right">→</button>
+    <div class="empty"></div>
+    <button id="down">↓</button>
+    <div class="empty"></div>
+  </div>
+
+  <video id="localVideoPlayer" autoplay muted></video>
+  <div id="remoteVideosContainer"></div>
+
+  <script src="./src/controller.js" type="module"></script>
+  <script src="./src/webRTCManager.js" type="module"></script>
+  <!-- <script src="./src/main.js" type="module"></script> -->
 </body>
+
 </html>
