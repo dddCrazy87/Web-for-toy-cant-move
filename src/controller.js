@@ -22,8 +22,9 @@ function getMoveVector() {
 
 function sendMoveVector(vector) {
     if (window.webRTCManager && window.webRTCManager.isWebSocketConnected) {
+        const targetId = targetPeerIdInput.value.trim();
         const msg = JSON.stringify({ type: "move", vector });
-        window.webRTCManager.sendViaDataChannel(msg);
+        window.webRTCManager.sendViaDataChannel(msg, targetId || null);
         console.log("送出移動向量: " + msg);
     } else {
         console.warn("WebRTC 尚未連線，無法送出移動向量:", msg);
@@ -73,6 +74,7 @@ function setupButton(id) {
 const websocketUrlInput = document.getElementById("websocketUrl");
 const localPeerIdInput = document.getElementById("localPeerId");
 const stunServerInput = document.getElementById("stunServer");
+const targetPeerIdInput = document.getElementById("targetPeerId");
 const connectWsBtn = document.getElementById("connectWsBtn");
 const disconnectWsBtn = document.getElementById("disconnectWsBtn");
 
