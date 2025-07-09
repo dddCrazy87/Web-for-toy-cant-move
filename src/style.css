@@ -30,3 +30,20 @@ button {
 video {
     display: none;
 }
+
+.controller,
+.controller * {
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+img {
+    -webkit-touch-callout: none;
+}
+
+html,
+body {
+    touch-action: manipulation;
+}
