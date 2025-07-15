@@ -1,4 +1,98 @@
 import { WebRTCManager } from './webRTCManager.js';
+import { GyroscopeManager } from './gyroscopeManager.js';
+
+// === Gyroscope Control ===
+const startGyroscopeBtn = document.getElementById("startGyroscopeBtn");
+const calibrateBtn = document.getElementById("calibrateBtn");
+const currentCoordinates = document.getElementById("currentCoordinates");
+const currentDirection = document.getElementById("currentDirection");
+
+const gyroscopeManager = new GyroscopeManager({
+    movementThreshold: 20,        
+    enableAudio: true,            
+    enableVibration: true,        
+    debugMode: true,              
+    autoCalibrate: false,         
+    calibrationTime: 500,       
+    smoothingFactor: 0.3,        
+    deadZone: 5,                 
+    maxThreshold: 60             
+});
+
+gyroscopeManager.on('directionChange', (direction, lastDirection) => {
+    console.log(`方向變化: ${lastDirection} → ${direction}`);
+
+    currentDirection.textContent = direction;
+
+    // 可以在這裡添加額外的視覺效果
+    currentDirection.className = direction !== '靜止' ? 'direction-active' : '';
+});
+
+gyroscopeManager.on('coordinateChange', (coords) => {
+    console.log(`目前座標: X=${coords.x.toFixed(2)}, Y=${coords.y.toFixed(2)}`);
+
+    currentCoordinates.textContent = `(${coords.x.toFixed(2)}, ${coords.y.toFixed(2)})`;
+    sendMoveVector(coords);
+});
+
+gyroscopeManager.on('calibrationComplete', (calibration) => {
+    console.log('校正完成:', calibration);
+
+    calibrateBtn.textContent = '重新校正';
+    calibrateBtn.disabled = false;
+});
+
+// --- 啟動陀螺儀 ---
+startGyroscopeBtn.addEventListener('click', async function() {
+    try {
+        const success = await gyroscopeManager.init();
+
+        if (success) {
+            this.textContent = 'Started';
+            this.disabled = true;
+            
+            // 啟用校正按鈕
+            calibrateBtn.disabled = false;
+
+            console.log('GyroscopeManager 初始化成功');
+        } else {
+            this.textContent = '感應器啟用失敗';
+            console.error('GyroscopeManager 初始化失敗');
+        }
+    } catch (error) {
+        console.error('權限請求失敗:', error);
+        this.textContent = '權限被拒絕';
+    }
+});
+
+if (gyroscopeManager.isPlatformSupported()) {
+     console.log('平台支援體感控制');
+} else {
+    alert('平台可能不支援體感控制');
+}
+
+// --- 校正 ---
+calibrateBtn.addEventListener('click', async function() {
+    try {
+        this.textContent = '校正中...';
+        this.disabled = true;
+        
+        // 執行校正
+        await gyroscopeManager.calibrate();
+
+        console.log('校正完成');
+    } catch (error) {
+        console.error('校正失敗:', error);
+        this.textContent = '校正失敗';
+        this.disabled = false;
+    }
+});
+
+//清理資源
+window.addEventListener('beforeunload', () => {
+    gyroscopeManager.destroy();
+});
+
 
 const pressed = { up: false, down: false, left: false, right: false };
 
