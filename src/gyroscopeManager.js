@@ -1,4 +1,4 @@
-class gyroscopeManager {
+class GyroscopeManager {
     constructor(config = {}) {
         // 可配置的設定
         this.config = {
@@ -808,4 +808,4 @@ class gyroscopeManager {
     }
 }
 
-export default gyroscopeManager;
+export { GyroscopeManager };

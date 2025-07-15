@@ -48,7 +48,7 @@ startGyroscopeBtn.addEventListener('click', async function() {
         const success = await gyroscopeManager.init();
 
         if (success) {
-            this.textContent = 'Started';
+            this.textContent = '感測器已啟動';
             this.disabled = true;
             
             // 啟用校正按鈕
