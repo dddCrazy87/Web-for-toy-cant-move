@@ -121,7 +121,7 @@ function sendMoveVector(vector) {
         window.webRTCManager.sendViaDataChannel(msg, targetId || null);
         console.log("送出移動向量: " + msg);
     } else {
-        console.warn("WebRTC 尚未連線，無法送出移動向量:", msg);
+        console.warn("WebRTC 尚未連線，無法送出移動向量:", vector);
     }
 }
 
