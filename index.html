@@ -26,12 +26,12 @@
   </div>
 
   <!-- Gyroscope UI -->
-   <div class="gyroscopeContainer">
-      <button id="startGyroscopeBtn">啟用感測器</button>
-      <button id="calibrateBtn">校正</button>
-      <div>Current Coordinates: <span id="currentCoordinates">(0, 0)</span></div>
-      <div>Current Direction: <span id="currentDirection">靜止</span></div>
-   </div>
+  <div class="gyroscopeContainer">
+    <button id="startGyroscopeBtn">啟用感測器</button>
+    <button id="calibrateBtn">校正</button>
+    <div>Current Coordinates: <span id="currentCoordinates">(0, 0)</span></div>
+    <div>Current Direction: <span id="currentDirection">靜止</span></div>
+  </div>
 
   <!-- 控制器按鈕 -->
   <div class="controller">
@@ -49,9 +49,9 @@
   <video id="localVideoPlayer" autoplay muted></video>
   <div id="remoteVideosContainer"></div>
 
+  <script src="src/roomManager.js"></script>
   <script src="./src/controller.js" type="module"></script>
   <script src="./src/webRTCManager.js" type="module"></script>
-  <!-- <script src="./src/main.js" type="module"></script> -->
 </body>
 
 </html>
